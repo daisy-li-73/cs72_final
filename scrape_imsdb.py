@@ -27,16 +27,11 @@ for m in movies:
   title = a_tag.text
 
   # Get writers
-  i_tag = p.find_element(By.TAG_NAME, "i")
+  i_tag = m.find_element(By.TAG_NAME, "i")
   writers = i_tag.text  # This will include 'Written by'
-  writers = writer_text.replace("Written by ", "") 
+  writers = writers.replace("Written by ", "") 
 
   f.write(title+","+writers+"\n")
-
-  # Navigate to next page, download script
-  movie_link = a_tag.get_attribute("href") 
-
-  
    
 f.close()
 driver.quit()    
