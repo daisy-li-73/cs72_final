@@ -14,11 +14,10 @@ outputFilename = sys.argv[2]
 f = open(outputFilename, "w")
 f.write("IMSDB_Title,RT_Title,CriticScore,AudienceScore\n")
 
+# Initialize Chrome driver
 options = ChromeOptions()
 options.add_argument("--headless=new")
-
 driver = webdriver.Chrome(options=options)
-
 driver.get("https://www.rottentomatoes.com/")
 
 # Read input file
