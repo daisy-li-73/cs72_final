@@ -17,8 +17,7 @@ f.write("IMSDB_Title,RT_Title,CriticScore,AudienceScore\n")
 options = ChromeOptions()
 options.add_argument("--headless=new")
 
-# driver = webdriver.Chrome(options=options)
-driver = webdriver.Chrome()
+driver = webdriver.Chrome(options=options)
 
 driver.get("https://www.rottentomatoes.com/")
 
