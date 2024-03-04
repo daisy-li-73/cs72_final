@@ -17,17 +17,18 @@ f.write("IMSDB_Title,RT_Title,CriticScore,AudienceScore\n")
 # Initialize Chrome driver
 options = ChromeOptions()
 options.add_argument("--headless=new")
-driver = webdriver.Chrome(options=options)
+# driver = webdriver.Chrome(options=options)
+driver = webdriver.Chrome()
 driver.get("https://www.rottentomatoes.com/")
 
 # Read input file
 with open(inputFilename, "r") as file:
   for line in file:
-    print(line)
     found = False
 
     # Parse input
-    parsed_input = line.split(",")
+    parsed_input = line.strip()
+    parsed_input = parsed_input.split(",")
     imsdb_title = parsed_input[0]
     imsdb_writers = parsed_input[1:]
     imsdb_writers_set = set(imsdb_writers)
@@ -58,6 +59,9 @@ with open(inputFilename, "r") as file:
       # Get list of writers from the movie's page
       movie_info = driver.find_element(By.ID, "info")
       li_elements = movie_info.find_elements(By.TAG_NAME, "li")
+      if len(li_elements) < 6: # Defensive programming
+        f.write(",,,")
+        continue
       writers_element = li_elements[5]
       span_element = writers_element.find_element(By.CSS_SELECTOR, "span[data-qa='movie-info-item-value']")
       writer_links = span_element.find_elements(By.TAG_NAME, "a")
