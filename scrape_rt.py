@@ -23,6 +23,7 @@ driver.get("https://www.rottentomatoes.com/")
 # Read input file
 with open(inputFilename, "r") as file:
   for line in file:
+    print(line)
     found = False
 
     # Parse input
@@ -38,18 +39,19 @@ with open(inputFilename, "r") as file:
     search_string = imsdb_title
     for writer in imsdb_writers:
       search_string += " "+writer
-    search_bar = driver.find_element(By.CLASS_NAME, "search-text")
+    search_bar = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "search-text")))
     search_bar.click()
     search_bar.send_keys(search_string)
-    search_bar.send_keys(Keys.RETURN)
+    search_submit = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "search-submit")))
+    search_submit.click()
 
     # Locate the search results component
     search_results = WebDriverWait(driver, 10).until(
     EC.presence_of_element_located((By.CSS_SELECTOR, "ul[slot='list']"))
     )
+    
     result_items = search_results.find_elements(By.CSS_SELECTOR, "search-page-media-row")  # Adjust the selector as necessary
     result_urls = [result.find_element(By.CSS_SELECTOR, "a[data-qa='info-name']").get_attribute("href") for result in result_items]
-
     # Iterate through the results
     for result in result_urls:
       driver.get(result)
