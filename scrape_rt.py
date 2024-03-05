@@ -30,8 +30,8 @@ def main():
     # Initialize Chrome driver
     options = ChromeOptions()
     options.add_argument("--headless=new")
-    driver = webdriver.Chrome(options=options)
-    # driver = webdriver.Chrome()
+    # driver = webdriver.Chrome(options=options)
+    driver = webdriver.Chrome()
     driver.get("https://www.rottentomatoes.com/")
 
     # Read input file
@@ -41,11 +41,14 @@ def main():
         found = False
 
         # Parse input
+        if (", the" in line):
+          line = line.replace(", the", "")
         parsed_input = line.strip()
         parsed_input = parsed_input.split(",")
         imsdb_title = parsed_input[0]
         imsdb_writers = parsed_input[1:]
         imsdb_writers_set = set(imsdb_writers)
+        print("imsdb_writers: ", imsdb_writers)
 
         # Write IMSDB title to output file
         f.write(imsdb_title+",")
@@ -86,14 +89,21 @@ def main():
           span_element = writers_element.find_element(By.CSS_SELECTOR, "span[data-qa='movie-info-item-value']")
           writer_links = span_element.find_elements(By.TAG_NAME, "a")
           rt_writers = [link.text for link in writer_links]
+          print("rt_writers: ", rt_writers)
 
           # Check if the writers match      
           rt_writers_set = set(rt_writers)
+          if rt_writers_set is None:
+            continue
+
           common_writers = imsdb_writers_set.intersection(rt_writers_set)
+          print("common_writers: ", common_writers)
 
           # Prepare sets to hold writers not found in the initial intersection
           unmatched_imsdb_writers = imsdb_writers_set - common_writers
           unmatched_rt_writers = rt_writers_set - common_writers
+          print("unmatched_imsdb_writers: ", unmatched_imsdb_writers)
+          print("unmatched_rt_writers: ", unmatched_rt_writers)
 
           if len(unmatched_imsdb_writers) != 0 or len(unmatched_rt_writers) != 0:
             for writer1 in unmatched_imsdb_writers:
