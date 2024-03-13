@@ -1,6 +1,6 @@
 ###
-# Author: Daisy Li and Lily Scott
-# Date: 2021-04-25
+# Author: Daisy Li, Lily Scott, Meghan O'Keefe
+# daisy.li.26@dartmouth.edu, lily.t.scott.24@dartmouth.edu, meghan.e.okeefe.24@dartmouth.edu
 # Purpose: Scrape Rotten Tomatoes website to get critic and audience scores for movies and output to csv.
 # Uses Selenium WebDriver.
 ###

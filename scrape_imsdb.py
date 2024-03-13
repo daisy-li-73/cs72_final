@@ -1,5 +1,6 @@
 ###
-# Author: Daisy Li
+# Author: Daisy Li, Lily Scott, Meghan O'Keefe
+# daisy.li.26@dartmouth.edu, lily.t.scott.24@dartmouth.edu, meghan.e.okeefe.24@dartmouth.edu
 # Date: 2021-04-25
 # Purpose: Scrape IMSDB website to get titles and writers of all movie scripts and output to csv.
 # Uses Selenium WebDriver.
