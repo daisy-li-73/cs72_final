@@ -1,3 +1,9 @@
+###
+# Author: Daisy Li
+# Date: 2021-04-25
+# Purpose: Scrape IMSDB website to get titles and writers of all movie scripts and output to csv.
+# Uses Selenium WebDriver.
+###
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.common.by import By

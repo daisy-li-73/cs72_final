@@ -1,3 +1,10 @@
+###
+# Author: Daisy Li and Lily Scott
+# Date: 2021-04-25
+# Purpose: Scrape Rotten Tomatoes website to get critic and audience scores for movies and output to csv.
+# Uses Selenium WebDriver.
+###
+
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.common.by import By
